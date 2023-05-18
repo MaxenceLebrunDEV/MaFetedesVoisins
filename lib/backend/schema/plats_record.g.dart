@@ -33,10 +33,10 @@ class _$PlatsRecordSerializer implements StructuredSerializer<PlatsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.quantity;
+    value = object.who;
     if (value != null) {
       result
-        ..add('quantity')
+        ..add('who')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.ffRef;
@@ -69,8 +69,8 @@ class _$PlatsRecordSerializer implements StructuredSerializer<PlatsRecord> {
           result.description = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'quantity':
-          result.quantity = serializers.deserialize(value,
+        case 'who':
+          result.who = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
@@ -92,14 +92,14 @@ class _$PlatsRecord extends PlatsRecord {
   @override
   final String? description;
   @override
-  final int? quantity;
+  final int? who;
   @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$PlatsRecord([void Function(PlatsRecordBuilder)? updates]) =>
       (new PlatsRecordBuilder()..update(updates))._build();
 
-  _$PlatsRecord._({this.name, this.description, this.quantity, this.ffRef})
+  _$PlatsRecord._({this.name, this.description, this.who, this.ffRef})
       : super._();
 
   @override
@@ -115,7 +115,7 @@ class _$PlatsRecord extends PlatsRecord {
     return other is PlatsRecord &&
         name == other.name &&
         description == other.description &&
-        quantity == other.quantity &&
+        who == other.who &&
         ffRef == other.ffRef;
   }
 
@@ -124,7 +124,7 @@ class _$PlatsRecord extends PlatsRecord {
     var _$hash = 0;
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
-    _$hash = $jc(_$hash, quantity.hashCode);
+    _$hash = $jc(_$hash, who.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -135,7 +135,7 @@ class _$PlatsRecord extends PlatsRecord {
     return (newBuiltValueToStringHelper(r'PlatsRecord')
           ..add('name', name)
           ..add('description', description)
-          ..add('quantity', quantity)
+          ..add('who', who)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -152,9 +152,9 @@ class PlatsRecordBuilder implements Builder<PlatsRecord, PlatsRecordBuilder> {
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
-  int? _quantity;
-  int? get quantity => _$this._quantity;
-  set quantity(int? quantity) => _$this._quantity = quantity;
+  int? _who;
+  int? get who => _$this._who;
+  set who(int? who) => _$this._who = who;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -169,7 +169,7 @@ class PlatsRecordBuilder implements Builder<PlatsRecord, PlatsRecordBuilder> {
     if ($v != null) {
       _name = $v.name;
       _description = $v.description;
-      _quantity = $v.quantity;
+      _who = $v.who;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -193,10 +193,7 @@ class PlatsRecordBuilder implements Builder<PlatsRecord, PlatsRecordBuilder> {
   _$PlatsRecord _build() {
     final _$result = _$v ??
         new _$PlatsRecord._(
-            name: name,
-            description: description,
-            quantity: quantity,
-            ffRef: ffRef);
+            name: name, description: description, who: who, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

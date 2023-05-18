@@ -13,7 +13,7 @@ abstract class PlatsRecord implements Built<PlatsRecord, PlatsRecordBuilder> {
 
   String? get description;
 
-  int? get quantity;
+  int? get who;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -22,7 +22,7 @@ abstract class PlatsRecord implements Built<PlatsRecord, PlatsRecordBuilder> {
   static void _initializeBuilder(PlatsRecordBuilder builder) => builder
     ..name = ''
     ..description = ''
-    ..quantity = 0;
+    ..who = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('plats');
@@ -48,7 +48,7 @@ abstract class PlatsRecord implements Built<PlatsRecord, PlatsRecordBuilder> {
 Map<String, dynamic> createPlatsRecordData({
   String? name,
   String? description,
-  int? quantity,
+  int? who,
 }) {
   final firestoreData = serializers.toFirestore(
     PlatsRecord.serializer,
@@ -56,7 +56,7 @@ Map<String, dynamic> createPlatsRecordData({
       (p) => p
         ..name = name
         ..description = description
-        ..quantity = quantity,
+        ..who = who,
     ),
   );
 

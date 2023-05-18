@@ -86,6 +86,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Main',
           path: '/main',
           builder: (context, params) => MainWidget(),
+        ),
+        FFRoute(
+          name: 'CreatePerson',
+          path: '/createPerson',
+          builder: (context, params) => CreatePersonWidget(),
+        ),
+        FFRoute(
+          name: 'ModifyPerson',
+          path: '/modifyPerson',
+          builder: (context, params) => ModifyPersonWidget(
+            nameremote: params.getParam('nameremote', ParamType.String),
+            foodremote: params.getParam('foodremote', ParamType.String),
+            countremote: params.getParam('countremote', ParamType.int),
+            ref: params
+                .getParam('ref', ParamType.DocumentReference, false, ['plats']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
@@ -267,13 +283,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primary,
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/fete-des-voisins-removebg-preview.png',
+                    fit: BoxFit.contain,
                   ),
                 )
               : page;

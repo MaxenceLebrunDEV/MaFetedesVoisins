@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
@@ -255,39 +253,10 @@ class _LoginWidgetState extends State<LoginWidget>
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            var _shouldSetState = false;
-                            GoRouter.of(context).prepareAuthEvent();
-                            final user =
-                                await authManager.signInWithGoogle(context);
-                            if (user == null) {
-                              return;
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
                             }
-                            final _localAuth = LocalAuthentication();
-                            bool _isBiometricSupported =
-                                await _localAuth.isDeviceSupported();
-                            bool canCheckBiometrics =
-                                await _localAuth.canCheckBiometrics;
-                            if (_isBiometricSupported && canCheckBiometrics) {
-                              _model.auth = await _localAuth.authenticate(
-                                  localizedReason:
-                                      'Veuillez vous identifiez pour accéder au données',
-                                  options: const AuthenticationOptions(
-                                      biometricOnly: true));
-                              setState(() {});
-                            }
-
-                            _shouldSetState = true;
-                            if (_model.auth!) {
-                              context.pushNamedAuth('Main', mounted);
-
-                              if (_shouldSetState) setState(() {});
-                              return;
-                            } else {
-                              if (_shouldSetState) setState(() {});
-                              return;
-                            }
-
-                            if (_shouldSetState) setState(() {});
+                            context.pushNamed('Main');
                           },
                           text: 'Se connecter',
                           options: FFButtonOptions(
